@@ -1,155 +1,86 @@
-# Imersão DevOps - Alura Google Cloud
+# 📦 API Escolar – CI/CD com Docker e GitHub Actions
 
-Este projeto é uma API desenvolvida com FastAPI para gerenciar alunos, cursos e matrículas em uma instituição de ensino. A aplicação foi containerizada com Docker para simular ambientes reais, eliminando o clássico problema do "na minha máquina funciona".
-
-## Pré-requisitos
-
-- [Python 3.10 ou superior instalado](https://www.python.org/downloads/)
-- [Git](https://git-scm.com/downloads)
-- [Docker](https://www.docker.com/get-started/)
-- Extensão Gemini Code Assist (opcional para apoio com IA)
-
-
-## Dia 1: subindo o projeto
-
-1. **Faça o download do repositório:**
-   [Clique aqui para realizar o download](https://github.com/guilhermeonrails/imersao-devops/archive/refs/heads/main.zip)
-
-2. **Crie um ambiente virtual:**
-   ```sh
-   python3 -m venv ./venv
-   ```
-   No meu windows, usei python -m venv ./venv
-
-3. **Ative o ambiente virtual:**
-   - No Linux/Mac:
-     ```sh
-     source venv/bin/activate
-     ```
-   - No Windows, abra um terminal no modo administrador e execute o comando:
-   ```sh
-   Set-ExecutionPolicy RemoteSigned
-   ```
-
-     ```sh
-     venv\Scripts\activate
-     ```
-
-4. **Instale as dependências:**
-   ```sh
-   pip install -r requirements.txt
-   ```
-
-5. **Execute a aplicação:**
-   ```sh
-   uvicorn app:app --reload
-   ```
-
-6. **Acesse a documentação interativa:**
-
-   Abra o navegador e acesse:  
-   [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-
-   Aqui você pode testar todos os endpoints da API de forma interativa.
+Este projeto foi desenvolvido como parte da **Imersão Cloud DevOps**, evolução do repositório [`api-escolar-fastapi-docker`](https://github.com/ronayrton/api-escolar-fastapi-docker), com foco em práticas modernas de **DevOps** como **Integração Contínua (CI)** e **Entrega Contínua (CD)**.
 
 ---
 
-## Estrutura do Projeto
+## 🚀 Objetivos
 
-📦 imersao-devops/
-├── app.py                      # Arquivo principal da aplicação FastAPI
-├── models.py                   # Modelos do banco de dados (SQLAlchemy)
-├── schemas.py                  # Schemas de validação (Pydantic)
-├── database.py                 # Configuração da conexão com SQLite
-├── routers/                    # Rotas organizadas por recurso (alunos,cursos, matrículas)
-├── requirements.txt            # Lista de dependências do projeto
-├── escola.db                   # Banco de dados SQLite criado automaticamente
-├── assets/                     # Arquivos estáticos do projeto (imagens, diagramas, etc.)
-│   ├── screenshots/            # Prints da API, interface Swagger, etc.
-│   └── diagrams/               # Diagramas de arquitetura e estrutura       
-└── README.md                   # Documentação do projeto
-
+- Automatizar o ciclo de vida da aplicação com GitHub Actions
+- Construir imagens Docker com boas práticas (sem usar `latest`)
+- Utilizar Docker Compose com volumes persistentes
+- Organizar o projeto com workflows no padrão `.github/workflows`
+- Integrar práticas recomendadas com apoio de **IA**
 
 ---
 
-## Observações
+## 🧰 Tecnologias e ferramentas
 
-- O banco de dados SQLite será criado automaticamente como `escola.db` na primeira execução.
-- Para reiniciar o banco, basta apagar o arquivo `escola.db` (isso apagará todos os dados).
+- **FastAPI**
+- **Docker & Docker Compose**
+- **GitHub Actions**
+- **CI/CD com pipelines**
+- **Volumes persistentes**
+- **Boas práticas orientadas**
+- **.github/workflows/main.yml**
+- **Extensão Gemini Code Assist (Google AI)**
 
 ---
 
-## Resultado
+## 🤖 IA na prática
 
-![API rodando no ambiente virtual local](api-docs-localhost.png)
+Utilizei a **Extensão Gemini Code Assist** para:
 
+- Sugerir boas práticas no `Dockerfile`
+- Auxiliar na criação do `docker-compose.yml`
+- Gerar partes do workflow `.github/workflows/main.yml`
+- Validar variáveis de ambiente e organização da pipeline
 
-## Arquitetura do Projeto (versão local)
+---
 
-                       ┌────────────────────┐
-                       │     Usuário        │
-                       │ (Navegador/Client) │
-                       └────────┬───────────┘
-                                │
-                                ▼
-                    ┌────────────────────────┐
-                    │     FastAPI (app.py)   │
-                    │  ────────────────────  │
-                    │  Rotas (routers/)      │
-                    │  Schemas (schemas.py)  │
-                    │  Models (models.py)    │
-                    │  DB (database.py)      │
-                    └───────────┬────────────┘
-                                │
-                                ▼
-                 ┌────────────────────────────┐
-                 │    Banco de Dados SQLite   │
-                 │        (escola.db)         │
-                 └────────────────────────────┘
+## 📦 Funcionalidades
+
+- Criação de uma aplicação containerizada com Docker-compose
+- Evitar o uso da imagem `:latest` para garantir consistência e previsibilidade
+- Pipeline automatizada com GitHub Actions para:
+  - Build da imagem Docker
+  - Execução de testes automatizados
+  - Deploy automatizado (simulado ou real)
+- Estrutura `.github/workflows` bem definida e comentada
 
 
-## Futuro com Docker
+## 🔁 CI/CD com GitHub Actions
 
-                    ┌──────────────────────────────────────┐
-                    │              Docker                  │
-                    └──────────────────────────────────────┘
-                          │                      │
-          ┌───────────────┘                      └──────────────┐
-          ▼                                                     ▼
-┌──────────────────────────────┐           ┌──────────────────────────────┐
-│     Container: FastAPI       │           │  Container: SQLite (local)   │
-│ (app.py, routers, models...) │           │   (ou possível Postgres)     │
-└────────────┬─────────────────┘           └────────────┬─────────────────┘
-             │                                          │
-             ▼                                          ▼
-     Acesso via navegador                       Volume persistente (opcional)
+Workflow automatizado para:
 
+- 🔨 Build da imagem
+- ✅ Validação e testes (mock)
+- 🚀 Deploy (simulado)
+- 🔐 Uso de secrets e variáveis
 
+Local: `.github/workflows/main.yml`
 
-## Criando com Docker
+---
 
-1. Criar Dockerfile com instruções de build
+## 🧪 Execução local
 
-2. Criar .dockerignore para ignorar arquivos desnecessários
-
-3. Construir a imagem Docker:
 ```bash
- docker build -t api .
+git clone https://github.com/seu-usuario/api-escolar-ci-cd-github-actions.git
+cd api-escolar-ci-cd-github-actions
+docker-compose up -d
 ```
-
-4. Executar a imagem:
-```bash
- docker run -d -p 8000:8000 api
-```
-
-## Referências
-- [Documentação Oficial do Docker](https://docs.docker.com/reference/dockerfile/)
+Acesse a API em: http://localhost:8000
 
 
+## 🚀 GitHub Actions
+Veja o workflow em .github/workflows/pipeline.yml. Ele é responsável por:
+
+- Construir a imagem com docker build
+
+- Validar o código e rodar testes
+
+- Subir a imagem (caso real) para o DockerHub ou GitHub Container Registry
+
+- Enviar alertas ou logs de execução
 
 
-
-
-
-Referências
-https://docs.docker.com/reference/dockerfile/
